@@ -1,0 +1,19 @@
+#headerImage {
+    height: 200px;
+    width: 100%;
+    overflow: hidden;
+    
+    img {
+        position:relative;
+        top: -850px;
+        filter: blur(10px);
+    }
+}
+
+#headerText {
+    color:white;
+    margin: 25px;
+    top: 50px;
+    position:absolute;
+    -webkit-text-stroke: black 0.5px;
+}

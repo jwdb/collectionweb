@@ -1,0 +1,14 @@
+.homegrid {
+    display: grid;
+    gap: 10px;
+    margin: 10px;
+    grid-template-columns: repeat(4, auto);
+    grid-template-rows: auto;
+    margin: 0 auto;
+}
+
+.home {
+    display: block;
+    margin: 0 auto;
+    width: 90%;
+}
