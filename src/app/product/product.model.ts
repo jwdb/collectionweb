@@ -1,7 +1,7 @@
 export class ProductModel {
-    ID:string;
-    Name:string;
-    Price:number;
-    Supply:number;
-    GroupID:string;
+    id:string;
+    name:string;
+    price:number;
+    supply:number;
+    groupID:string;
 }

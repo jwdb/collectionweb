@@ -15,6 +15,10 @@ import { AddComponent } from './admin/product/add/add.component';
 import { OrdersComponent } from './admin/orders/orders.component';
 import { InfoComponent } from './admin/orders/info/info.component';
 import { DetailComponent } from './product/detail/detail.component';
+import { LoginComponent } from './login/login.component';
+import { ApiClientService } from './api-client.service';
+import { HttpClientModule } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -30,13 +34,18 @@ import { DetailComponent } from './product/detail/detail.component';
     AddComponent,
     OrdersComponent,
     InfoComponent,
-    DetailComponent
+    DetailComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    ApiClientService,
+    CookieService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

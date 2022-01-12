@@ -1,0 +1,68 @@
+$maincolor: #5200eb;
+$maincolor2: #6200ff;
+
+.login_form {
+    display: flex;
+    flex:  center;
+    justify-content: center;
+    box-pack: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.login-wrapper {
+    max-width: 500px;
+    width: 100%;
+}  
+
+form {
+    padding: 2em 1em;
+    border-radius: 5px;
+
+    label {
+        margin: 0 3% .25em;
+        display: block;
+    }
+
+    input {
+        width: 94%;
+        padding: .5em .25em;
+        margin: 0 3% 1em;
+        font-size: 1.2em;
+        border: 2px solid #000;
+        outline: none;
+        transition: all 0.25s;
+        border-radius: 5px;
+        
+        -moz-box-sizing: border-box; 
+        -webkit-box-sizing: border-box; 
+        box-sizing: border-box;
+        
+        &.password {
+            padding-right: 4rem;
+        }
+    }
+
+    input:focus {
+        border: 2px solid $maincolor;
+    }
+
+    button {
+        width: 94%;
+        margin: 2em 3% 0;
+        border: none;
+        background: $maincolor;
+        padding: 1em 0;
+        font-size: 1.25em;
+        clear: both;
+        color: #000;
+        border-radius: 5px;
+        outline: none;
+        transition: all .25s;
+        cursor: pointer;
+    }
+
+    button:focus,button:hover {
+        background: $maincolor2;
+    }
+}

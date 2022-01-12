@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
   menuItems = [{title: "test", url:"url"}, {title: "test2", url:"url2"}]
-  loggedIn = true;
+  loggedIn = false;
   constructor() { }
 
   ngOnInit(): void {
