@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { ApiClientService } from 'src/app/api-client.service';
 
 @Component({
   selector: 'app-menu',
@@ -8,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 export class MenuComponent implements OnInit {
   menuItems = [{title: "test", url:"url"}, {title: "test2", url:"url2"}]
   loggedIn = false;
-  constructor() { }
+  private loginSubscription: Subscription;
+  constructor(private apiClient: ApiClientService) { }
 
   ngOnInit(): void {
+    this.loginSubscription = this.apiClient
+      .isLoggedInObservable
+      .subscribe(newState => this.loggedIn = newState);
   }
 
+  ngOnDestroy() : void {
+    this.loginSubscription.unsubscribe();
+  }
 }
