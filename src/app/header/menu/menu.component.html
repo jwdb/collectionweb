@@ -2,15 +2,6 @@
     <div class="menu-item start" routerLink="/">
         <p>Home</p>
     </div>
-    <ng-template ngFor let-item [ngForOf]="menuItems">
-        <div class="menu-item start" routerLink="{{item.url}}">
-            <p>{{item.title}}</p>
-        </div>
-
-    </ng-template>
-    <div class="menu-item spacer">
-
-    </div>
 
     <div class="menu-item end" routerLink="/login" *ngIf="!loggedIn">
         <p>Login</p>
@@ -22,5 +13,9 @@
 
     <div class="menu-item end" *ngIf="loggedIn && isAdmin" routerLink="/admin">
         <p>Admin</p>
+    </div>
+    
+    <div id="cartinfo" class="menu-item end">
+        <app-cartinfo></app-cartinfo>
     </div>
 </div>
