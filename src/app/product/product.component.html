@@ -1,6 +1,6 @@
-<div class="product-info">
+<div class="product-info" routerLink="/product/{{ product.id }}">
     <figure class="product-image">
-        <img src="/assets/headerImage.jpeg" alt="product-image" />
+        <img [src]="image" alt="product-image" />
     </figure>
     <h3>{{ product.name }}</h3>
     <p class="product-desc">€{{ product.price }}</p>

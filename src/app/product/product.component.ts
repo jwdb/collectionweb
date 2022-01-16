@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { ApiClientService } from '../api-client.service';
 import { ProductModel } from './product.model';
 
 @Component({
@@ -8,9 +10,13 @@ import { ProductModel } from './product.model';
 })
 export class ProductComponent implements OnInit {
   @Input() product:ProductModel;
+  image : SafeUrl;
 
-  constructor() { }
+  constructor(private apiClient: ApiClientService,
+    private sanitizer:DomSanitizer) { }
 
   ngOnInit(): void {
+    let objectURL = 'data:image/jpeg;base64,' + this.product.image;
+    this.image = this.sanitizer.bypassSecurityTrustUrl(objectURL);
   }
 }

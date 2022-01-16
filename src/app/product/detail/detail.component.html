@@ -1,1 +1,13 @@
-<p>detail works!</p>
+<section class="product-detail">
+    <figure>
+        <img [src]="image" alt="{{ product?.name }}" />
+    </figure>
+    <article>
+        <h3>{{product?.name}}</h3>
+        <p class="price">€{{product?.price}}</p>
+        <p class="supply">Supply: {{product?.supply}}</p>
+        <label for="amountToAdd">Amount: </label>
+        <input type="number" #amountToAdd name="amountToAdd" value="1" max="{{ product?.supply }}" min="1" />
+        <button class="add" (click)="addToCart(+amountToAdd.value)">Add to basket</button>
+    </article>
+</section>  

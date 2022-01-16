@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ApiToken } from "./models/api-token.model";
 import { CookieService } from "ngx-cookie-service";
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { ProductModel } from './product/product.model';
 import jwtDecode, { JwtPayload } from 'jwt-decode';
 import { Subject } from 'rxjs';
 import {map} from "rxjs";
+import { Byte } from '@angular/compiler/src/util';
 
 
 @Injectable({
@@ -15,11 +16,13 @@ import {map} from "rxjs";
 export class ApiClientService {
   private urlBase: string = "http://localhost:8081/";
   public isLoggedInObservable = new Subject<boolean>();
+  public isAdminObservable = new Subject<boolean>();
 
   constructor(private http: HttpClient,
     private cookieService: CookieService,
     private sanitizer:DomSanitizer) {
       this.isLoggedInObservable.next(this.isLoggedIn());
+      this.isAdminObservable.next(this.isAdmin());
   }
   
   getTokenData(): ApiToken {
@@ -52,8 +55,21 @@ export class ApiClientService {
 
     if (expired)
       return false;
-
+    
+    console.log("Logged in!");
     return true;
+  }
+
+  isAdmin() : boolean {
+    var token = this.getTokenData();
+    if (token == null)
+      return false;
+
+    if (token.role == "Admin")
+      return true;
+
+    return false;
+
   }
 
   getRequestHeader() : HttpHeaders {
@@ -68,13 +84,13 @@ export class ApiClientService {
                 .post<ApiToken>(this.urlBase + "user/signin", userData)
                 .subscribe({
                     error: error => {
-                        this.isLoggedInObservable.next(this.isLoggedIn());
-                        rej(error);
+                      this.updateObservables();
+                      rej(error);
                     },
                     next: responseData => {
-                        this.isLoggedInObservable.next(this.isLoggedIn());
-                        this.setTokenData(responseData);
-                        res(true);
+                      this.updateObservables();
+                      this.setTokenData(responseData);
+                      res(true);
                     }
                 })
         });
@@ -88,6 +104,31 @@ export class ApiClientService {
             }
           )
         )
+    }
+
+    getProduct(id: string){
+      return this.http.get<ProductModel>(`${this.urlBase}product/${id}`)
+        .pipe(
+          map((response: ProductModel) => {
+              return response;
+            }
+          )
+        )
+    }
+
+    byteToBlob(file: Blob) : SafeUrl {
+      const mediaType = 'application/image';
+      const blob = new Blob([file], { type: mediaType });
+      var unsafeImageUrl = URL.createObjectURL(blob);
+      var imageUrl = this.sanitizer.bypassSecurityTrustUrl(unsafeImageUrl);
+
+      return imageUrl;
+    }
+
+    private updateObservables() : void {
+      console.log("updating Observables!");
+      this.isLoggedInObservable.next(this.isLoggedIn());
+      this.isAdminObservable.next(this.isAdmin());
     }
 }
 

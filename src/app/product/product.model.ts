@@ -4,4 +4,5 @@ export class ProductModel {
     price:number;
     supply:number;
     groupID:string;
+    image:string;
 }

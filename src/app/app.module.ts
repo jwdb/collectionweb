@@ -20,6 +20,8 @@ import { ApiClientService } from './api-client.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { FormsModule } from '@angular/forms';
+import { ShoppingcartModule } from './shoppingcart/shoppingcart.module';
+import { CartinfoComponent } from './header/cartinfo/cartinfo.component';
 
 @NgModule({
   declarations: [
@@ -36,13 +38,15 @@ import { FormsModule } from '@angular/forms';
     OrdersComponent,
     InfoComponent,
     DetailComponent,
-    LoginComponent
+    LoginComponent,
+    CartinfoComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ShoppingcartModule
   ],
   providers: [
     ApiClientService,
