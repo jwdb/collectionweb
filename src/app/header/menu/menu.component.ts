@@ -22,6 +22,9 @@ export class MenuComponent implements OnInit {
     this.adminSubscription = this.apiClient
       .isAdminObservable
       .subscribe(newState => this.isAdmin = newState);
+      
+      this.loggedIn = this.apiClient.isLoggedIn();
+      this.isAdmin = this.apiClient.isAdmin();
   }
 
   ngOnDestroy() : void {
