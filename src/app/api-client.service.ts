@@ -5,7 +5,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { ProductModel } from './product/product.model';
 import jwtDecode, { JwtPayload } from 'jwt-decode';
-import { Subject } from 'rxjs';
+import { catchError, Subject, throwError } from 'rxjs';
 import {map} from "rxjs";
 import { Byte } from '@angular/compiler/src/util';
 
@@ -82,10 +82,13 @@ export class ApiClientService {
         return new Promise<boolean>((res, rej) => {
             this.http
                 .post<ApiToken>(this.urlBase + "user/signin", userData)
+                .pipe(catchError(error => {
+                  return throwError(() => error);
+                }))
                 .subscribe({
                     error: error => {
-                      this.updateObservables();
                       rej(error);
+                      this.updateObservables();
                     },
                     next: responseData => {
                       this.updateObservables();

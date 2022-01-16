@@ -6,5 +6,6 @@
         <label for="password">Password</label>
         <input class="password" required name="login[password]" [(ngModel)]="password" type="password" />
         <button (click)="login()">Sign In</button>
+        <div class="error" [class.hidden]="!hasError">{{ errorText }}</div>
     </section>
 </div>
