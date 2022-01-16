@@ -1,1 +1,29 @@
-<p>add works!</p>
+<form class="propGrid" [formGroup]="productForm" (ngSubmit)="onFormSubmit()">
+    <div class="row">
+        <label for="name">Product Name</label>
+        <input type="text" formControlName="name" name="name" />
+    </div>
+    <div class="row">
+        <label for="price">Product Price</label>
+        <input type="number" formControlName="price" name="price" />
+    </div>
+    <div class="row">
+        <label for="supply">Product Supply</label>
+        <input type="number" formControlName="supply" name="supply" />
+    </div>
+    <div class="row">
+        <label for="image">Product Image </label>
+        <input type="file" formControlName="image" name="image" id="image" (change)="onFileChange($event)">
+    </div>
+    <div class="row">
+        <button name="submit" type="submit">Submit</button>
+    </div>
+    <div class="row">
+        <div 
+            class="result"
+            [textContent]="resultText"
+            [class.error]="hasError" 
+            [class.success]="!hasError && success"
+            [class.hidden]="!hasError && !success"></div>
+    </div>
+</form>

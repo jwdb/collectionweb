@@ -1,5 +1,7 @@
 <div class="product-grid">
-    <div class="product">
-        
+    <div class="product" *ngFor="let product of products">
+        <div>{{product.name}}</div>
     </div>
 </div>
+<div class="add-button" routerLink="add">+</div>
+<router-outlet></router-outlet>

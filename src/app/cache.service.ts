@@ -30,17 +30,14 @@ export class CacheService {
                 return null;
             }
 
-            console.log(items);
             const now = new Date().getTime()
             // Check if any are expired
             const expired = items?.find(c => {
-                console.log(c)
                 const record = JSON.parse(c[1])
                 return (record.hasExpiration && record.expiration <= now);
             }) !== undefined;
 
             if (expired) {
-                console.log(expired!)
                 return null;
             }
 

@@ -136,6 +136,24 @@ export class ApiClientService {
       )
   }
 
+  postProduct(product: ProductModel): Promise<ProductModel> {
+    return new Promise<ProductModel>((succ, rej) => this.post<ProductModel>({
+      url: `${this.urlBase}product`,
+      body: product,
+      cacheMins: 0,
+      cacheid: 'product',
+      requestType: 'single'
+    }, this.getRequestHeader()).subscribe({
+      next: result => {
+        succ(result);
+      },
+      error: error => {
+        rej(error)
+      }
+    })
+    );
+  }
+
   byteToBlob(file: Blob): SafeUrl {
     const mediaType = 'application/image';
     const blob = new Blob([file], { type: mediaType });
@@ -146,28 +164,27 @@ export class ApiClientService {
   }
 
   private updateObservables(): void {
-    console.log("updating Observables!");
     this.isLoggedInObservable.next(this.isLoggedIn());
     this.isAdminObservable.next(this.isAdmin());
   }
 
-  private get<T>(options: HttpOptions): Observable<T> {
-    return this.httpCall(Verbs.GET, options)
+  private get<T>(options: HttpOptions, headers?: HttpHeaders): Observable<T> {
+    return this.httpCall(Verbs.GET, options, headers)
   }
 
-  private delete<T>(options: HttpOptions): Observable<T> {
-    return this.httpCall(Verbs.DELETE, options)
+  private delete<T>(options: HttpOptions, headers?: HttpHeaders): Observable<T> {
+    return this.httpCall(Verbs.DELETE, options, headers)
   }
 
-  private post<T>(options: HttpOptions): Observable<T> {
-    return this.httpCall(Verbs.POST, options)
+  private post<T>(options: HttpOptions, headers?: HttpHeaders): Observable<T> {
+    return this.httpCall(Verbs.POST, options, headers)
   }
 
-  private put<T>(options: HttpOptions): Observable<T> {
-    return this.httpCall(Verbs.PUT, options)
+  private put<T>(options: HttpOptions, headers?: HttpHeaders): Observable<T> {
+    return this.httpCall(Verbs.PUT, options, headers)
   }
 
-  private httpCall<T>(verb: Verbs, options: HttpOptions): Observable<T> {
+  private httpCall<T>(verb: Verbs, options: HttpOptions, headers?: HttpHeaders): Observable<T> {
 
     // Setup default values
     options.body = options.body || null
@@ -192,7 +209,8 @@ export class ApiClientService {
     }
 
     return this.http.request<any>(verb, options.url, {
-      body: options.body
+      body: options.body,
+      headers: headers
     })
       .pipe(
         switchMap(response => {
@@ -218,10 +236,6 @@ export class ApiClientService {
                 })
               }
             } else {
-              console.log(response);
-              console.log(options.requestType == 'all'
-                && options.cacheid != undefined
-                && options.idSpec != undefined);
               this._cacheService.save({
                 group: options.cacheid,
                 key: options.url,
