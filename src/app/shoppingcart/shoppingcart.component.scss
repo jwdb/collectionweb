@@ -1,0 +1,66 @@
+.cart {
+    width: 80%;
+    margin: 80px auto;
+
+    .titlebar {
+        font-weight: bold;
+        text-align: left;
+    }
+
+    .image {
+        margin-right: 50px;
+        width: 120px;
+        overflow: hidden;
+        padding: 10px;
+        img {
+            width: 120px;
+        }
+    }
+
+    td.price > p::before {
+        content: '€';
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .cart {
+        table,
+        thead,
+        tbody,
+        th,
+        td,
+        tr {
+            display: block;
+        }
+
+        thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+        tr {
+            border: 1px solid #ccc;
+        }
+
+        td {
+            border: none;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding: 10px 0 10px 50%;
+            white-space: normal;
+            text-align: left;
+        }
+
+        td:before {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+            text-align: left;
+            font-weight: bold;
+            content: attr(data-title);
+        }
+    }
+}

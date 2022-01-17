@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { ApiClientService } from 'src/app/api-client.service';
-import { ShoppingcartModule } from 'src/app/shoppingcart/shoppingcart.module';
+import { ShoppingcartService } from 'src/app/shoppingcart/shoppingcart.service';
 import { ProductModel } from '../product.model';
 
 @Component({
@@ -18,7 +18,7 @@ export class DetailComponent implements OnInit {
     private apiClient: ApiClientService,
      private routeState: ActivatedRoute,
     private sanitizer:DomSanitizer,
-    private shoppingCart : ShoppingcartModule) { }
+    private shoppingCart : ShoppingcartService) { }
 
   ngOnInit(): void {
     this.routeState.params.subscribe(c => {
@@ -31,6 +31,6 @@ export class DetailComponent implements OnInit {
   }
 
   addToCart(amount: number) : void {
-    this.shoppingCart.addToCart(this.product, amount);
+    this.shoppingCart.addToCart(this.product, amount, this.product.supply);
   }
 }

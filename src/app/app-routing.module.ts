@@ -12,12 +12,14 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { DetailComponent as ProductDetailComponent } from './product/detail/detail.component';
 import { DetailComponent as ProductGroupDetailComponent } from './productgroup/detail/detail.component';
+import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'cart', component: ShoppingcartComponent },
   { path: 'product/:id', component: ProductDetailComponent},
   { path: 'productgroup/:id', component: ProductGroupDetailComponent},
   { path: 'admin', component: AdminComponent, children: [

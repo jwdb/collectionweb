@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ShoppingcartModule } from 'src/app/shoppingcart/shoppingcart.module';
+import { ShoppingcartService } from 'src/app/shoppingcart/shoppingcart.service';
 
 @Component({
   selector: 'app-cartinfo',
@@ -10,11 +10,12 @@ import { ShoppingcartModule } from 'src/app/shoppingcart/shoppingcart.module';
 export class CartinfoComponent implements OnInit {
   cartCount: number = 0;
   shoppingCartSub: Subscription;
-  constructor(private shoppingCart: ShoppingcartModule) {
+  constructor(private shoppingCart: ShoppingcartService) {
     this.shoppingCartSub = shoppingCart.shoppingCartChanged.subscribe(c => this.cartCount = c);
    }
 
   ngOnInit(): void {
+    this.cartCount = this.shoppingCart.getCart().reduce((sum, item) => sum += item.qty, 0);
   }
 
   ngOnDestroy(): void {

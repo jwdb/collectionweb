@@ -25,8 +25,9 @@ import { ApiClientService } from './api-client.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ShoppingcartModule } from './shoppingcart/shoppingcart.module';
+import { ShoppingcartService } from './shoppingcart/shoppingcart.service';
 import { CartinfoComponent } from './header/cartinfo/cartinfo.component';
+import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 
 @NgModule({
   declarations: [
@@ -49,19 +50,20 @@ import { CartinfoComponent } from './header/cartinfo/cartinfo.component';
     AdminAddProductComponent,
     AdminProductComponent,
     AdminAddProductGroupComponent,
-    AdminProductGroupComponent
+    AdminProductGroupComponent,
+    ShoppingcartComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    ShoppingcartModule,
     ReactiveFormsModule
   ],
   providers: [
     ApiClientService,
-    CookieService
+    CookieService,
+    ShoppingcartService
   ],
   bootstrap: [AppComponent]
 })
