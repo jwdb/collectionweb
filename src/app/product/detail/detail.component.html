@@ -8,6 +8,6 @@
         <p class="supply">Supply: {{product?.supply}}</p>
         <label for="amountToAdd">Amount: </label>
         <input type="number" #amountToAdd name="amountToAdd" value="1" max="{{ product?.supply }}" min="1" />
-        <button class="add" (click)="addToCart(+amountToAdd.value)">Add to basket</button>
+        <button class="add fancy" (click)="addToCart(+amountToAdd.value)">Add to basket</button>
     </article>
 </section>  

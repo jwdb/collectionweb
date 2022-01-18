@@ -10,6 +10,7 @@ import { ShoppingcartService } from './shoppingcart.service';
 })
 export class ShoppingcartComponent implements OnInit {
   public cart: { product: ProductModel, qty: number, image: SafeUrl }[];
+  public cartTotal: number;
   public cartCount: number;
   constructor(
     private shoppingCartService: ShoppingcartService,
@@ -18,6 +19,14 @@ export class ShoppingcartComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCart();
+    this.shoppingCartService.shoppingCartChanged.subscribe((newAmount) => this.updateCounts(newAmount));
+    this.updateCounts(0);
+  }
+
+  updateCounts(_newAmount: number) : void {
+    this.cartTotal = this.shoppingCartService.cartTotal;
+    this.cartCount = this.shoppingCartService.cartCount;
+    console.log("count changed!");
   }
 
   loadCart(): void {
@@ -26,8 +35,6 @@ export class ShoppingcartComponent implements OnInit {
       let image = this.sanitizer.bypassSecurityTrustUrl(objectURL);
       return {product: item.product, qty: item.qty, image };
     });
-
-    this.cartCount = this.cart.reduce((sum, c) => sum += c.qty * c.product.price, 0);
   }
 
   remove(cartItem: { product: ProductModel, qty: number, image: SafeUrl }) {
@@ -35,4 +42,8 @@ export class ShoppingcartComponent implements OnInit {
     this.loadCart();
   }
 
+  clearCart() : void {
+    this.shoppingCartService.clearCart();
+    this.loadCart();
+  }
 }

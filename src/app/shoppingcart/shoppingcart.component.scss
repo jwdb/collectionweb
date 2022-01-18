@@ -1,24 +1,31 @@
-.cart {
+.cart-container {
     width: 80%;
     margin: 80px auto;
-
-    .titlebar {
-        font-weight: bold;
-        text-align: left;
-    }
-
-    .image {
-        margin-right: 50px;
-        width: 120px;
-        overflow: hidden;
-        padding: 10px;
-        img {
-            width: 120px;
+    .cart {
+        width: 100%;
+        .titlebar {
+            font-weight: bold;
+            text-align: left;
         }
-    }
 
-    td.price > p::before {
-        content: '€';
+        .image {
+            margin-right: 50px;
+            width: 120px;
+            overflow: hidden;
+            padding: 10px;
+            img {
+                width: 120px;
+            }
+        }
+
+        .price,
+        .action {
+            text-align: right;
+        }
+
+        td.price > p::before {
+            content: "€";
+        }
     }
 }
 
@@ -48,6 +55,11 @@
             position: relative;
             padding: 10px 0 10px 50%;
             white-space: normal;
+            text-align: left;
+        }
+
+        td.price,
+        td.action {
             text-align: left;
         }
 

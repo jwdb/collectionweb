@@ -28,6 +28,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShoppingcartService } from './shoppingcart/shoppingcart.service';
 import { CartinfoComponent } from './header/cartinfo/cartinfo.component';
 import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
+import { AddressComponent } from './shoppingcart/address/address.component';
+import { PaymentComponent } from './shoppingcart/payment/payment.component';
+import { SuccessComponent } from './shoppingcart/success/success.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +54,10 @@ import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
     AdminProductComponent,
     AdminAddProductGroupComponent,
     AdminProductGroupComponent,
-    ShoppingcartComponent
+    ShoppingcartComponent,
+    AddressComponent,
+    PaymentComponent,
+    SuccessComponent
   ],
   imports: [
     BrowserModule,

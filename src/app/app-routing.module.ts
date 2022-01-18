@@ -12,7 +12,10 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { DetailComponent as ProductDetailComponent } from './product/detail/detail.component';
 import { DetailComponent as ProductGroupDetailComponent } from './productgroup/detail/detail.component';
+import { AddressComponent } from './shoppingcart/address/address.component';
+import { PaymentComponent } from './shoppingcart/payment/payment.component';
 import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
+import { SuccessComponent } from './shoppingcart/success/success.component';
 
 
 const routes: Routes = [
@@ -20,6 +23,9 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'cart', component: ShoppingcartComponent },
+  { path: 'cart/address', component: AddressComponent },
+  { path: 'cart/payment', component: PaymentComponent },
+  { path: 'cart/success', component: SuccessComponent  },
   { path: 'product/:id', component: ProductDetailComponent},
   { path: 'productgroup/:id', component: ProductGroupDetailComponent},
   { path: 'admin', component: AdminComponent, children: [

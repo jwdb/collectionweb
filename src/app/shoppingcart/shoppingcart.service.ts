@@ -1,19 +1,17 @@
-import { Injectable, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Injectable } from '@angular/core';
 import { ProductModel } from '../product/product.model';
-import { Observable, Subject } from 'rxjs';
-
-
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class ShoppingcartService {
   private cart: { product: ProductModel, qty: number }[];
   shoppingCartChanged = new Subject<number>();
+  public cartTotal: number;
+  public cartCount: number;
 
-  constructor() {
-  }
+  constructor() { }
 
-  addToCart(product: ProductModel, qty: number, max: number) {
+  addToCart(product: ProductModel, qty: number, max: number) : void {
     let cartItem = this.getCart().find(item => item.product.id == product.id);
     if (cartItem) {
       if ((cartItem.qty + qty) <= max) {
@@ -22,10 +20,11 @@ export class ShoppingcartService {
     } else if (qty <= max) {
       this.cart.push({ product, qty });
     }
+
     this.saveCart();
   }
 
-  removeFromCart(product: ProductModel, qty: number) {
+  removeFromCart(product: ProductModel, qty: number) : void {
     let cartItem = this.getCart().find(item => item.product.id == product.id);
 
     if (cartItem == null)
@@ -36,23 +35,29 @@ export class ShoppingcartService {
     } else {
       cartItem.qty -= qty;
     }
+
     this.saveCart();
   }
 
-  saveCart( ) {
-
-    localStorage.setItem("cart", JSON.stringify(this.cart));
-    this.calculateTotal();
-
+  clearCart() : void {
+    this.cart = [];
+    this.saveCart();
   }
 
-  calculateTotal() {
-    this.shoppingCartChanged.next(this.cart.reduce((a, b) => a + b.qty, 0));
-
+  saveCart() : void {
+    localStorage.setItem("cart", JSON.stringify(this.cart));
+    this.calculateTotal();
   }
 
   getCart(): { product: ProductModel, qty: number }[] {
     this.cart = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart") ?? "") : [];
+    this.calculateTotal();
     return this.cart;
+  }
+
+  calculateTotal() {
+    this.cartTotal = this.cart.reduce((sum, c) => sum += c.qty * c.product.price, 0);
+    this.cartCount = this.cart.reduce((sum, c) => sum += c.qty, 0);
+    this.shoppingCartChanged.next(this.cartCount);
   }
 }

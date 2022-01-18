@@ -1,21 +1,21 @@
 <div id="menu">
-    <div class="menu-item start" routerLink="/">
+    <button class="menu-item start fancy" routerLink="/">
         <p>Home</p>
-    </div>
+    </button>
 
-    <div class="menu-item end" routerLink="/login" *ngIf="!loggedIn">
+    <button class="menu-item end fancy" routerLink="/login" *ngIf="!loggedIn">
         <p>Login</p>
-    </div>
+    </button>
 
-    <div class="menu-item end" routerLink="/logout" *ngIf="loggedIn">
+    <button class="menu-item end fancy" routerLink="/logout" *ngIf="loggedIn">
         <p>Logout</p>
-    </div>
+    </button>
 
-    <div class="menu-item end" *ngIf="loggedIn && isAdmin" routerLink="/admin">
+    <button class="menu-item end fancy" *ngIf="loggedIn && isAdmin" routerLink="/admin">
         <p>Admin</p>
-    </div>
+    </button>
     
-    <div id="cartinfo" class="menu-item end" routerLink="/cart">
+    <button id="cartinfo" class="menu-item end fancy" routerLink="/cart">
         <app-cartinfo></app-cartinfo>
-    </div>
+    </button>
 </div>

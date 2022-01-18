@@ -1,26 +1,42 @@
-<table class="cart">
-    <thead class="item titlebar">
-        <tr>
-            <th class="image"></th>
-            <th class="title">Name</th>
-            <th class="qty">Quantity</th>
-            <th class="price per">Price per item</th>
-            <th class="price rowtotal">Rowtotal</th>
-            <th class="action"></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr class="item" *ngFor="let cartItem of cart">
-            <td data-title="" class="image">
-                <img [src]="cartItem.image" alt="" />
+<div class="cart-container">
+    <table class="cart">
+        <thead class="item titlebar">
+            <tr>
+                <th class="image"></th>
+                <th class="title">Name</th>
+                <th class="qty">Quantity</th>
+                <th class="price per">Price per item</th>
+                <th class="price rowtotal">Rowtotal</th>
+                <th class="action"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="item" *ngFor="let cartItem of cart">
+                <td data-title="" class="image">
+                    <img [src]="cartItem.image" alt="" />
+                </td>
+                <td data-title="Name" class="title">{{ cartItem.product.name }}</td>
+                <td data-title="Quantity" class="qty">{{ cartItem.qty }}</td>
+                <td data-title="Price per item" class="price per">
+                    <p>{{ cartItem.product.price | number: '1.2-2' }}</p>
+                </td>
+                <td data-title="Rowtotal" class="price rowtotal">
+                    <p>{{ cartItem.qty * cartItem.product.price | number: '1.2-2' }}</p>
+                </td>
+                <td data-title="" class="action" (click)="remove(cartItem)">Remove</td>
+            </tr>
+        </tbody>
+        <tfoot class="cartTotal">
+            <td colspan="2" class="bold">Subtotal:</td>
+            <td data-title="Amount: ">{{cartCount}}</td>
+            <td data-title="Price: " colspan="2" class="price">
+                <p>{{cartTotal | number: '1.2-2'}}</p>
             </td>
-            <td data-title="Name" class="title">{{ cartItem.product.name }}</td>
-            <td data-title="Quantity" class="qty">{{ cartItem.qty }}</td>
-            <td data-title="Price per item" class="price per"><p>{{ cartItem.product.price | number: '1.2-2' }}</p></td>
-            <td data-title="Rowtotal" class="price rowtotal"><p>{{ cartItem.qty * cartItem.product.price | number: '1.2-2' }}</p></td>
-            <td data-title="" class="action" (click)="remove(cartItem)">Remove</td>
-        </tr>
-    </tbody>
-    <div class="cartTotal">
+            <td></td>
+        </tfoot>
+    </table>
+    <div class="order-actions">
+        <button class="fancy" routerLink="address">Order</button>
+        <button class="fancy" (click)="clearCart()">Clear</button>
     </div>
-</table>
+</div>

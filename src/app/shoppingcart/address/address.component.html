@@ -1,0 +1,33 @@
+<form class="propGrid" [formGroup]="addressForm" (ngSubmit)="onFormSubmit()">
+    <div class="row">
+        <label for="name">Full name</label>
+        <input type="text" formControlName="name" id="name" />
+        <div *ngIf="validateInput('name')" [ngClass] = "'error'">Full name is required. </div>
+    </div>
+    <div class="row">
+        <label for="street">Street and housenumber</label>
+        <input type="text" formControlName="street" id="street" />
+        <div *ngIf="validateInput('street')" [ngClass] = "'error'">Street and housenumber is required. </div>
+    </div>
+    <div class="row">
+        <label for="zip">ZIP code</label>
+        <input type="text" formControlName="zip" id="zip" />
+        <div *ngIf="validateInput('zip')" [ngClass] = "'error'">ZIP code is required. </div>
+    </div>
+    <div class="row">
+        <label for="city">City</label>
+        <input type="text" formControlName="city" id="city" />
+        <div *ngIf="validateInput('city')" [ngClass] = "'error'">City is required. </div>
+    </div>
+    <div class="row">
+        <button class="fancy" name="submit" type="submit">Next</button>
+    </div>
+    <div class="row">
+        <div 
+            class="result"
+            [textContent]="resultText"
+            [class.error]="hasError" 
+            [class.success]="!hasError && success"
+            [class.hidden]="!hasError && !success"></div>
+    </div>
+</form>
