@@ -1,1 +1,49 @@
-<p>orders works!</p>
+<div class="order-list-container">
+    <table class="order-table">
+        <thead class="titlebar">
+            <tr>
+                <th>Name</th>
+                <th>Street</th>
+                <th>ZIP</th>
+                <th>City</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="filler">
+                <td colspan="4">
+                <td>
+            </tr>
+            <ng-template ngFor let-order [ngForOf]="orders" let-i="index">
+                <tr [class.alternate]="i % 2" class="order-info-row">
+                    <td data-title="Name">{{order.name}}</td>
+                    <td data-title="Street">{{order.street}}</td>
+                    <td data-title="ZIP">{{order.zip}}</td>
+                    <td data-title="City">{{order.city}}</td>
+                </tr>
+                <tr [class.alternate]="i % 2">
+                    <td></td>
+                    <td colspan="3">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th class="right">Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let orderLine of order.products">
+                                    <td data-title="Product"> {{orderLine.productName}} </td>
+                                    <td data-title="Quantity" class="right"> {{orderLine.qty}} </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr class="filler">
+                    <td colspan="4">
+                    <td>
+                </tr>
+            </ng-template>
+        </tbody>
+    </table>
+</div>

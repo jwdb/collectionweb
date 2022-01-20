@@ -1,0 +1,106 @@
+.order-list-container {
+    width: 100%;
+    display: block;
+    margin: 20px auto;
+    th, td,tr {
+        border: 1px solid gray;
+        border-collapse: collapse;
+    }
+
+
+    .order-table {
+        width: 100%;
+        .titlebar {
+            font-weight: bold;
+            text-align: left;
+            height: 25px;
+            font-size: large;
+
+            th {
+                padding-right: 150px;
+            }
+        }
+
+        td {
+            text-align: left;
+        }
+
+        tr.alternate {
+            background-color: rgb(200,200,200);
+        }
+
+        tr:not(.alternate) {
+            background-color: rgb(220,220,220);
+        }
+
+        tr.order-info-row {
+            vertical-align: bottom;
+        }
+
+        tr.filler {
+            height: 20px;
+            background-color: white;
+            border: none;
+
+            td,th,tr {
+                border: none;
+            }
+        }
+    }
+
+    table table {
+        background-color: rgba(220,220,220,0.7);
+        width: 100%;
+        border: none;
+
+        td,th,tr {
+            border: none;
+        }
+
+        
+        td.right, th.right {
+            text-align: right;
+        }
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        display: block;
+    }
+
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    tr {
+        border: 1px solid #ccc;
+    }
+
+    td {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding: 10px 0 10px 50%;
+        white-space: normal;
+        text-align: left;
+    }
+
+    td:before {
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+        content: attr(data-title);
+    }
+}

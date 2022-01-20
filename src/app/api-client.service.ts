@@ -121,6 +121,22 @@ export class ApiClientService {
       )
   }
 
+  getAllOrders() {
+    return this.get<OrderRequest[]>({
+      url: this.urlBase + "order",
+      cacheMins: 5,
+      idSpec: 'id',
+      requestType: 'all',
+      cacheid: 'order'
+    }, this.getRequestHeader())
+      .pipe(
+        map((response: OrderRequest[]) => {
+          return response;
+        }
+        )
+      )
+  }
+
   getProduct(id: string) {
     return this.get<ProductModel>({
       url: `${this.urlBase}product/${id}`,
