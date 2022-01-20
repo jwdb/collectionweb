@@ -3,5 +3,5 @@
         <img [src]="image" alt="product-image" />
     </figure>
     <h3>{{ product.name }}</h3>
-    <p class="product-desc">€{{ product.price }}</p>
+    <p class="product-desc">€{{ product.price | number: '1.2-2' }}</p>
 </div>

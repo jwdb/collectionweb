@@ -1,9 +1,9 @@
 .homegrid {
-    display: grid;
+    display: flex;
     gap: 10px;
     margin: 10px;
-    grid-template-columns: repeat(4, auto);
-    grid-template-rows: auto;
+    flex-wrap: wrap;
+    gap: 50px;
     margin: 0 auto;
 }
 

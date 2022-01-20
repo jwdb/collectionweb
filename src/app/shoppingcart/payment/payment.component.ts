@@ -27,6 +27,7 @@ export class PaymentComponent implements OnInit {
       this.status = "Processing...";
       if (c) {
         this.status = "";
+        this.shoppingCart.clearCart();
         this.router.navigate(['cart','success']);
       } else {
         this.status = "An error occurred! try again later";

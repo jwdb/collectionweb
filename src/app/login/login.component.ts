@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { ApiClientService } from '../api-client.service';
 
 @Component({
@@ -12,9 +12,16 @@ export class LoginComponent implements OnInit {
   public password: string = "";
   public errorText: string = "";
   public hasError: boolean = false;
-  constructor(private apiClient: ApiClientService, private router: Router) { }
+  constructor(
+    private apiClient: ApiClientService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    console.log(this.route.snapshot);
+    if (this.route.snapshot.routeConfig?.path == "logout") {
+      this.apiClient.deleteTokenData();
+    }
   }
 
   login(): void {

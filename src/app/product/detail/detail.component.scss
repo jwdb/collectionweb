@@ -1,6 +1,6 @@
 .product-detail {
     display:flex;
-    
+    flex-wrap: wrap;
     > figure 
     {
         margin-left: 5px;

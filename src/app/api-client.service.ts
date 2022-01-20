@@ -45,6 +45,7 @@ export class ApiClientService {
 
   deleteTokenData(): void {
     this.cookieService.delete('Auth');
+    this.updateObservables();
   }
 
   isLoggedIn(): boolean {
@@ -96,8 +97,8 @@ export class ApiClientService {
             this.updateObservables();
           },
           next: responseData => {
-            this.updateObservables();
             this.setTokenData(responseData);
+            this.updateObservables();
             res(true);
           }
         })
@@ -180,6 +181,10 @@ export class ApiClientService {
     var imageUrl = this.sanitizer.bypassSecurityTrustUrl(unsafeImageUrl);
 
     return imageUrl;
+  }
+
+  clearCache() : void {
+    this._cacheService.cleanLocalStorage();
   }
 
   private updateObservables(): void {

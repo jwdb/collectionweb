@@ -21,6 +21,7 @@ import { SuccessComponent } from './shoppingcart/success/success.component';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'logout', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'cart', component: ShoppingcartComponent },
   { path: 'cart/address', component: AddressComponent },

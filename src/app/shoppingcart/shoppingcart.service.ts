@@ -89,7 +89,9 @@ export class ShoppingcartService {
     orderRequest.products = this.cart.items.map(c => {
       return {productID: c.product.id, qty: c.qty}
     });
-
-    return this.apiClient.postOrder(orderRequest).then(c => c != null);
+    return this.apiClient
+      .postOrder(orderRequest)
+      .then(c => this.apiClient.clearCache())
+      .then(c => c != null);
   }
 }

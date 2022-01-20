@@ -1,7 +1,10 @@
 img {
-    width:  240px;
-    margin: 0 auto;
-    display:block;
+    height:  300px;
+    margin: auto;
+    display:inline-block;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .product-info {
@@ -16,5 +19,6 @@ img {
         width:240px;
         height: 240px;
         margin: auto;
+        overflow: hidden;
     }
 }
