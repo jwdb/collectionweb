@@ -62,7 +62,6 @@ export class ApiClientService {
     if (expired)
       return false;
 
-    console.log("Logged in!");
     return true;
   }
 

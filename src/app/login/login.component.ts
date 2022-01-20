@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    console.log(this.route.snapshot);
     if (this.route.snapshot.routeConfig?.path == "logout") {
       this.apiClient.deleteTokenData();
     }
@@ -41,7 +40,6 @@ export class LoginComponent implements OnInit {
         }, rejected => {
           this.hasError = true;
           this.errorText = `Login failure (${rejected.status})`;
-          console.log(rejected);
         }
       );
   }

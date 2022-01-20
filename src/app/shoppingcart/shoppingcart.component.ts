@@ -26,7 +26,6 @@ export class ShoppingcartComponent implements OnInit {
   updateCounts(_newAmount: number) : void {
     this.cartTotal = this.shoppingCartService.cartTotal;
     this.cartCount = this.shoppingCartService.cartCount;
-    console.log("count changed!");
   }
 
   loadCart(): void {

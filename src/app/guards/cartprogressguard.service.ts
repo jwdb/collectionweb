@@ -15,8 +15,6 @@ export class CartprogressguardService implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const currentCart: Shoppingcart = this.shoppingCartService.getCart();
     const currentRoute = route.routeConfig?.path;
-    console.log(currentRoute);
-    console.log(currentCart);
     if (currentCart == null || currentCart.items.length <= 0)
     {
       this.router.navigate(['cart']);
