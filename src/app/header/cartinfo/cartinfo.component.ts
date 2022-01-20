@@ -15,7 +15,7 @@ export class CartinfoComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.cartCount = this.shoppingCart.getCart().reduce((sum, item) => sum += item.qty, 0);
+    this.cartCount = this.shoppingCart.cartCount;
   }
 
   ngOnDestroy(): void {

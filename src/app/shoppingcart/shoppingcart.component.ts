@@ -30,7 +30,7 @@ export class ShoppingcartComponent implements OnInit {
   }
 
   loadCart(): void {
-    this.cart = this.shoppingCartService.getCart().flatMap(item => {
+    this.cart = this.shoppingCartService.getCart().items.flatMap(item => {
       let objectURL = 'data:image/jpeg;base64,' + item.product.image;
       let image = this.sanitizer.bypassSecurityTrustUrl(objectURL);
       return {product: item.product, qty: item.qty, image };
