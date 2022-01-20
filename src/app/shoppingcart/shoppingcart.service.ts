@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { ProductModel } from '../product/product.model';
 import { Subject } from 'rxjs';
 import { Shoppingcart } from './shoppingcart.model';
+import { ApiClientService } from '../api-client.service';
+import { OrderRequest } from '../models/order-request.model';
 
 @Injectable()
 export class ShoppingcartService {
@@ -10,7 +12,7 @@ export class ShoppingcartService {
   public cartTotal: number;
   public cartCount: number;
 
-  constructor() { }
+  constructor(private apiClient: ApiClientService) { }
 
   addToCart(product: ProductModel, qty: number, max: number) : void {
     let cartItem = this.getCart().items.find(item => item.product.id == product.id);
@@ -75,5 +77,19 @@ export class ShoppingcartService {
     this.getCart();
     this.cart.isPaid = paid;
     this.saveCart();
+  }
+
+  submitOrder() : Promise<boolean> {
+    const orderRequest = new OrderRequest();
+    orderRequest.name = this.cart.name;
+    orderRequest.zip = this.cart.zip;
+    orderRequest.city = this.cart.city;
+    orderRequest.street = this.cart.street;
+    
+    orderRequest.products = this.cart.items.map(c => {
+      return {productID: c.product.id, qty: c.qty}
+    });
+
+    return this.apiClient.postOrder(orderRequest).then(c => c != null);
   }
 }

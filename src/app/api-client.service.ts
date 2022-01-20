@@ -11,6 +11,7 @@ import jwtDecode, { JwtPayload } from 'jwt-decode';
 import { catchError, Subject, throwError } from 'rxjs';
 import { map } from "rxjs";
 import { Byte } from '@angular/compiler/src/util';
+import { OrderRequest } from './models/order-request.model';
 
 
 @Injectable({
@@ -142,6 +143,24 @@ export class ApiClientService {
       body: product,
       cacheMins: 0,
       cacheid: 'product',
+      requestType: 'single'
+    }, this.getRequestHeader()).subscribe({
+      next: result => {
+        succ(result);
+      },
+      error: error => {
+        rej(error)
+      }
+    })
+    );
+  }
+
+  postOrder(order: OrderRequest): Promise<string> {
+    return new Promise<string>((succ, rej) => this.post<string>({
+      url: `${this.urlBase}order`,
+      body: order,
+      cacheMins: 0,
+      cacheid: 'order',
       requestType: 'single'
     }, this.getRequestHeader()).subscribe({
       next: result => {
