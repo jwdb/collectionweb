@@ -7,6 +7,8 @@ import { AddComponent as AdminAddProductComponent } from './admin/product/add/ad
 import { ProductComponent as AdminProductComponent } from './admin/product/product.component';
 import { AddComponent as AdminAddProductGroupComponent } from './admin/productgroup/add/add.component';
 import { ProductgroupComponent as AdminProductGroupComponent } from './admin/productgroup/productgroup.component';
+import { AdminguardService } from './guards/adminguard.service';
+import { CartprogressguardService } from './guards/cartprogressguard.service';
 
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -24,12 +26,15 @@ const routes: Routes = [
   { path: 'logout', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'cart', component: ShoppingcartComponent },
-  { path: 'cart/address', component: AddressComponent },
-  { path: 'cart/payment', component: PaymentComponent },
-  { path: 'cart/success', component: SuccessComponent  },
+  { path: 'cart/address', component: AddressComponent, canActivate: [CartprogressguardService] },
+  { path: 'cart/payment', component: PaymentComponent, canActivate: [CartprogressguardService] },
+  { path: 'cart/success', component: SuccessComponent, canActivate: [CartprogressguardService]  },
   { path: 'product/:id', component: ProductDetailComponent},
   { path: 'productgroup/:id', component: ProductGroupDetailComponent},
-  { path: 'admin', component: AdminComponent, children: [
+  { path: 'admin',
+   component: AdminComponent,
+   canActivate: [AdminguardService],
+   children: [
       { path: 'product', component: AdminProductComponent, children: [
         { path: 'add', component: AdminAddProductComponent},
         { path: 'edit/:id', component: AdminAddProductComponent}

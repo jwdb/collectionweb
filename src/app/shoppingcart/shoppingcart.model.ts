@@ -8,7 +8,7 @@ export class Shoppingcart {
   city: string;
   isPaid: boolean = false;
 
-  isAddressFufilled() : boolean {
+  public isAddressFufilled() : boolean {
     if (this.name && this.street && this.zip && this.city) {
       return true;
     }

@@ -53,7 +53,7 @@ export class ShoppingcartService {
   }
 
   getCart(): Shoppingcart {
-    this.cart = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart") ?? "") : new Shoppingcart();
+    this.cart = localStorage.getItem("cart") ? Object.assign(new Shoppingcart(),JSON.parse(localStorage.getItem("cart") ?? "")) : new Shoppingcart();
     this.calculateTotal();
     return this.cart;
   }
